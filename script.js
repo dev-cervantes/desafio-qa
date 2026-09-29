@@ -73,8 +73,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Validações simples
         if (!nome) {
-            document.getElementById('nome-error').textContent = 'Nome é obrigatório';
+            document.getElementById('nome-error').textContent = 'Nome e sobrenome são obrigatórios';
             hasError = true;
+        } else {
+            const palavrasNome = nome.trim().split(/\s+/);
+
+            if (palavrasNome.length < 2) {
+                document.getElementById('nome-error').textContent = 'Informe seu nome e sobrenome';
+                hasError = true;
+            } else if (!/^[A-Za-zÀ-ÿ\s]+$/.test(nome)) {
+                document.getElementById('nome-error').textContent = 'Informe um nome válido';
+                hasError = true;
+            }
         }
 
         if (!email) {
